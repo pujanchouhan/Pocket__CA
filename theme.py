@@ -1,286 +1,482 @@
 """
 theme.py
-Visual identity for Pocket C.A. — a "ledger / passbook" aesthetic instead of
-default Streamlit gray boxes. Grounded in the subject: deep ledger-green +
-aged paper cream + brass accents, a serif display face for headings, and a
-monospace face for numbers (like an old accounting ledger book).
+Pocket C.A. — bright modern fintech theme
 """
 
 LEDGER_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
+/* =========================
+   MAIN COLORS
+   ========================= */
 :root {
-  --paper: #F6F1E4;
-  --paper-dark: #EDE6D3;
-  --ink: #1C2321;
-  --ledger-green: #0F3D2E;
-  --ledger-green-light: #1B5E45;
-  --brass: #C9A227;
-  --debit-red: #A63D40;
-  --credit-green: #2E7D52;
+    --bg: #F4F7FB;
+    --surface: #FFFFFF;
+    --surface-2: #EEF2F7;
+    --text: #172033;
+    --muted: #68758A;
+    --primary: #FF4F81;
+    --primary-dark: #E83D70;
+    --secondary: #5B5FEF;
+    --cyan: #18B7C9;
+    --green: #16A878;
+    --red: #E5485D;
+    --border: #DDE3EC;
 }
 
+/* =========================
+   APP BACKGROUND
+   ========================= */
 .stApp {
-  background-color: var(--paper);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(255,79,129,0.13), transparent 25%),
+        radial-gradient(circle at 100% 0%, rgba(91,95,239,0.13), transparent 25%),
+        #F4F7FB !important;
+    color: #172033 !important;
 }
 
-/* ---------- Typography ---------- */
+[data-testid="stAppViewContainer"] {
+    background: #F4F7FB !important;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(244,247,251,0.90) !important;
+}
+
+.block-container {
+    max-width: 1400px !important;
+    padding-top: 2rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* =========================
+   TEXT
+   ========================= */
 html, body, [class*="css"] {
-  font-family: 'Inter', sans-serif;
-  color: var(--ink);
-}
-h1, h2, h3 {
-  font-family: 'Fraunces', serif !important;
-  color: var(--ledger-green) !important;
-  letter-spacing: -0.01em;
+    font-family: 'DM Sans', sans-serif !important;
+    color: #172033 !important;
 }
 
-/* ---------- Sidebar ---------- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif !important;
+    color: #172033 !important;
+}
+
+p, label, span, div {
+    color: inherit;
+}
+
+/* =========================
+   SIDEBAR
+   ========================= */
 [data-testid="stSidebar"] {
-  background-color: var(--ledger-green);
+    background: linear-gradient(180deg, #171B3A 0%, #25205A 100%) !important;
+    border-right: none !important;
 }
+
+[data-testid="stSidebar"] > div:first-child {
+    background: transparent !important;
+}
+
 [data-testid="stSidebar"] * {
-  color: var(--paper) !important;
+    color: #FFFFFF !important;
 }
+
 [data-testid="stSidebar"] input,
-[data-testid="stSidebar"] textarea {
-  color: var(--ink) !important;
-}
-[data-testid="stSidebar"] hr {
-  border-color: rgba(246,241,228,0.2) !important;
-}
-[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
-  background-color: rgba(246,241,228,0.06);
-  border: 1px dashed rgba(201,162,39,0.5);
+[data-testid="stSidebar"] textarea,
+[data-testid="stSidebar"] [data-baseweb="select"] > div {
+    background: rgba(255,255,255,0.10) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
 }
 
-/* ---------- Ledger header banner ---------- */
+/* =========================
+   HEADER
+   ========================= */
 .ledger-header {
-  background: linear-gradient(135deg, var(--ledger-green) 0%, var(--ledger-green-light) 100%);
-  border-radius: 14px;
-  padding: 2.2rem 2.6rem;
-  margin-bottom: 1.6rem;
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #FF4F81 0%, #8E55E8 52%, #5B5FEF 100%) !important;
+    border: none !important;
+    border-radius: 24px;
+    padding: 2.4rem 2.7rem;
+    margin-bottom: 1.7rem;
+    box-shadow: 0 18px 45px rgba(91,95,239,0.22);
 }
+
+.ledger-header::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -80px;
+    top: -130px;
+    background: rgba(255,255,255,0.16);
+    border-radius: 50%;
+    filter: blur(8px);
+}
+
 .ledger-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    transparent, transparent 27px, rgba(201,162,39,0.09) 28px
-  );
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: 45%;
+    bottom: -120px;
+    background: rgba(255,255,255,0.10);
+    border-radius: 50%;
 }
-.ledger-eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
-  color: var(--brass);
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-.ledger-header h1 {
-  color: var(--paper) !important;
-  font-family: 'Fraunces', serif !important;
-  font-size: 2.7rem;
-  font-weight: 700;
-  margin: 0;
-  position: relative;
-}
-.ledger-tagline {
-  font-family: 'Inter', sans-serif;
-  color: rgba(246,241,228,0.75);
-  margin-top: 0.6rem;
-  font-size: 0.98rem;
-  max-width: 44rem;
-  position: relative;
-}
+
+.ledger-header h1,
+.ledger-header p,
+.ledger-eyebrow,
+.ledger-tagline,
 .ledger-seal {
-  position: absolute;
-  top: 1.4rem;
-  right: 1.8rem;
-  width: 62px;
-  height: 62px;
-  border: 2px solid var(--brass);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-8deg);
-  font-size: 1.7rem;
-  background: rgba(201,162,39,0.08);
+    position: relative;
+    z-index: 2;
 }
 
-/* ---------- Metric cards ---------- */
+.ledger-header h1 {
+    color: #FFFFFF !important;
+    font-size: 2.7rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.ledger-eyebrow {
+    color: #FFE7EF !important;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    margin-bottom: 0.5rem;
+}
+
+.ledger-tagline {
+    color: #FFF3F7 !important;
+    margin-top: 0.6rem;
+    font-size: 0.98rem;
+}
+
+.ledger-seal {
+    position: absolute;
+    right: 1.8rem;
+    top: 1.4rem;
+    width: 62px;
+    height: 62px;
+    border: 1px solid rgba(255,255,255,0.40);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF !important;
+    background: rgba(255,255,255,0.12);
+}
+
+/* =========================
+   COLUMNS
+   ========================= */
+[data-testid="column"] {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+/* =========================
+   METRICS
+   ========================= */
 [data-testid="stMetric"] {
-  background: var(--paper-dark) !important;
-  border: 1px solid rgba(15,61,46,0.15);
-  border-top: 3px solid var(--brass);
-  border-radius: 10px;
-  padding: 1rem 1.2rem 0.9rem 1.2rem !important;
+    background: #FFFFFF !important;
+    border: 1px solid #DDE3EC !important;
+    border-top: 4px solid #FF4F81 !important;
+    border-radius: 16px !important;
+    padding: 1rem 1.2rem !important;
+    box-shadow: 0 8px 25px rgba(23,32,51,0.07) !important;
 }
+
 [data-testid="stMetricValue"] {
-  font-family: 'IBM Plex Mono', monospace !important;
-  color: var(--ledger-green) !important;
-  font-weight: 600 !important;
+    color: #172033 !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-weight: 600 !important;
 }
+
 [data-testid="stMetricLabel"] {
-  font-family: 'IBM Plex Mono', monospace !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem !important;
-  opacity: 0.7;
+    color: #68758A !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
 }
 
-/* ---------- Buttons ---------- */
-.stButton button,
-.stButton button p,
-.stButton button span {
-  font-family: 'Inter', sans-serif !important;
-  color: var(--ledger-green) !important;
-}
-.stButton button {
-  background: var(--paper-dark) !important;
-  border: 1px solid rgba(15,61,46,0.25) !important;
-  border-radius: 8px !important;
-  font-weight: 500 !important;
-}
-.stButton button:hover {
-  border-color: var(--brass) !important;
-  background: #ffffff !important;
-}
-.stButton button[kind="primary"],
-.stButton button[kind="primary"] p,
-.stButton button[kind="primary"] span {
-  color: var(--paper) !important;
-}
-.stButton button[kind="primary"] {
-  background: var(--ledger-green) !important;
-  border: none !important;
-}
-.stButton button[kind="primary"]:hover {
-  background: var(--ledger-green-light) !important;
-}
-/* Sidebar's blanket text-color rule otherwise overrides button text
-   (it targets every descendant element, including the <p>/<span> inside
-   buttons, with higher priority than inherited color) — these selectors
-   are more specific so sidebar buttons stay readable. */
-[data-testid="stSidebar"] .stButton button,
-[data-testid="stSidebar"] .stButton button p,
-[data-testid="stSidebar"] .stButton button span {
-  color: var(--ledger-green) !important;
-}
-[data-testid="stSidebar"] .stButton button[kind="primary"],
-[data-testid="stSidebar"] .stButton button[kind="primary"] p,
-[data-testid="stSidebar"] .stButton button[kind="primary"] span {
-  color: var(--paper) !important;
-}
-/* Catch-all: any button in the sidebar (including the file uploader's
-   "Browse files" button, which isn't a .stButton) stays readable. */
-[data-testid="stSidebar"] button,
-[data-testid="stSidebar"] button p,
-[data-testid="stSidebar"] button span {
-  color: var(--ledger-green) !important;
+/* =========================
+   BUTTONS
+   ========================= */
+.stButton > button {
+    background: #FFFFFF !important;
+    color: #172033 !important;
+    border: 1px solid #DDE3EC !important;
+    border-radius: 11px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 5px 15px rgba(23,32,51,0.05) !important;
 }
 
-/* ---------- Tabs ---------- */
+.stButton > button:hover {
+    background: #FFF0F5 !important;
+    color: #E83D70 !important;
+    border-color: #FF4F81 !important;
+}
+
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #FF4F81, #8E55E8) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
+
+.stButton > button[kind="primary"] * {
+    color: #FFFFFF !important;
+}
+
+/* =========================
+   INPUTS
+   ========================= */
+.stTextInput input,
+.stNumberInput input,
+.stTextArea textarea {
+    background: #FFFFFF !important;
+    color: #172033 !important;
+    border: 1px solid #DDE3EC !important;
+    border-radius: 11px !important;
+}
+
+.stTextInput input:focus,
+.stNumberInput input:focus,
+.stTextArea textarea:focus {
+    border-color: #FF4F81 !important;
+    box-shadow: 0 0 0 1px #FF4F81 !important;
+}
+
+[data-baseweb="select"] > div {
+    background: #FFFFFF !important;
+    color: #172033 !important;
+    border-color: #DDE3EC !important;
+    border-radius: 11px !important;
+}
+
+/* Dropdown text */
+[data-baseweb="select"] * {
+    color: #172033 !important;
+}
+
+/* =========================
+   TABS
+   ========================= */
+.stTabs [data-baseweb="tab-list"] {
+    background: #FFFFFF !important;
+    border: 1px solid #DDE3EC !important;
+    border-radius: 13px !important;
+    padding: 0.3rem;
+    gap: 0.25rem;
+}
+
 .stTabs [data-baseweb="tab"] {
-  font-family: 'IBM Plex Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.78rem;
-  color: var(--ink);
+    color: #68758A !important;
+    border-radius: 9px;
+    font-family: 'IBM Plex Mono', monospace;
 }
+
 .stTabs [aria-selected="true"] {
-  color: var(--ledger-green) !important;
-  font-weight: 600;
+    background: #FFF0F5 !important;
+    color: #E83D70 !important;
 }
+
 .stTabs [data-baseweb="tab-highlight"] {
-  background-color: var(--brass) !important;
+    background: #FF4F81 !important;
 }
 
-/* ---------- Chat ---------- */
+/* =========================
+   CHAT
+   ========================= */
 [data-testid="stChatMessage"] {
-  border-radius: 10px;
-  border: 1px solid rgba(15,61,46,0.12);
-  background: #ffffff;
+    background: #FFFFFF !important;
+    border: 1px solid #DDE3EC !important;
+    border-radius: 15px !important;
+    box-shadow: 0 7px 20px rgba(23,32,51,0.06) !important;
 }
+
 [data-testid="stChatInput"] textarea {
-  font-family: 'Inter', sans-serif;
+    background: #FFFFFF !important;
+    color: #172033 !important;
 }
 
-/* ---------- Section headers (ledger-style rule) ---------- */
+/* =========================
+   CUSTOM CARDS
+   ========================= */
 .ledger-section-title {
-  font-family: 'Fraunces', serif;
-  color: var(--ledger-green);
-  font-size: 1.3rem;
-  font-weight: 600;
-  border-bottom: 2px solid var(--brass);
-  padding-bottom: 0.3rem;
-  margin: 1.4rem 0 0.9rem 0;
-  display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #172033 !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 1px solid #DDE3EC;
+    padding-bottom: 0.5rem;
+    margin: 1.4rem 0 0.9rem;
 }
 
-/* ---------- Ledger callout (empty states / info) ---------- */
+.ledger-section-title::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FF4F81;
+    box-shadow: 0 0 12px rgba(255,79,129,0.45);
+}
+
 .ledger-note {
-  background: var(--paper-dark);
-  border-left: 3px solid var(--brass);
-  border-radius: 6px;
-  padding: 0.9rem 1.1rem;
-  font-size: 0.92rem;
-  color: var(--ink);
+    background: #FFF4F7 !important;
+    color: #172033 !important;
+    border: 1px solid #FFD1DE !important;
+    border-left: 4px solid #FF4F81 !important;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
 }
 
-/* ---------- Chart card wrapper ---------- */
 .ledger-chart-card {
-  background: #ffffff;
-  border: 1px solid rgba(15,61,46,0.15);
-  border-radius: 10px;
-  padding: 0.6rem 0.8rem 0.2rem 0.8rem;
-  margin-bottom: 1rem;
+    background: #FFFFFF !important;
+    border: 1px solid #DDE3EC !important;
+    border-radius: 16px;
+    padding: 0.6rem 0.8rem;
+    box-shadow: 0 8px 25px rgba(23,32,51,0.06);
+}
+
+/* =========================
+   EXPANDER / DATAFRAME
+   ========================= */
+[data-testid="stExpander"] {
+    background: #FFFFFF !important;
+    border: 1px solid #DDE3EC !important;
+    border-radius: 13px !important;
+}
+
+[data-testid="stDataFrame"] {
+    border: 1px solid #DDE3EC !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* =========================
+   FILE UPLOADER
+   ========================= */
+[data-testid="stFileUploaderDropzone"] {
+    background: #FFFFFF !important;
+    border: 1px dashed #FF4F81 !important;
+    border-radius: 13px !important;
+}
+
+[data-testid="stFileUploaderDropzone"]:hover {
+    background: #FFF4F7 !important;
+}
+
+/* =========================
+   DIVIDERS
+   ========================= */
+hr {
+    border-color: #DDE3EC !important;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+@media (max-width: 768px) {
+    .block-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .ledger-header {
+        padding: 1.7rem;
+        border-radius: 18px;
+    }
+
+    .ledger-header h1 {
+        font-size: 2.1rem;
+    }
+
+    .ledger-seal {
+        display: none;
+    }
+
+    [data-testid="column"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 </style>
 """
 
-# Shared Plotly styling so charts match the ledger palette instead of default
-# Plotly colors.
-PLOTLY_COLORWAY = ["#0F3D2E", "#C9A227", "#A63D40", "#1B5E45", "#6B8F71", "#8C6D1F"]
-
+PLOTLY_COLORWAY = [
+    "#FF4F81",
+    "#5B5FEF",
+    "#18B7C9",
+    "#16A878",
+    "#E5485D",
+    "#8E55E8",
+]
 
 def apply_ledger_chart_theme(fig):
-    """
-    Apply the ledger palette/fonts to a Plotly figure. Sets colors explicitly
-    on every text element (not just the global font) because Streamlit's
-    built-in Plotly theme overlay (and dark-mode) otherwise overrides unset
-    properties. IMPORTANT: pass theme=None to st.plotly_chart() when using
-    this, or Streamlit will re-apply its own theme on top and wash colors out.
-    """
-    ink = "#1C2321"
     fig.update_layout(
         colorway=PLOTLY_COLORWAY,
-        paper_bgcolor="#ffffff",
-        plot_bgcolor="#ffffff",
-        font=dict(family="IBM Plex Mono, monospace", color=ink, size=13),
-        title=dict(font=dict(color=ink)),
-        legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=ink, size=12)),
-        margin=dict(t=30, b=20, l=10, r=10),
+        paper_bgcolor="#FFFFFF",
+        plot_bgcolor="#FFFFFF",
+        font=dict(
+            family="DM Sans, sans-serif",
+            color="#172033",
+            size=13,
+        ),
+        title=dict(
+            font=dict(
+                family="Space Grotesk, sans-serif",
+                color="#172033",
+                size=18,
+            )
+        ),
+        legend=dict(
+            bgcolor="rgba(255,255,255,0)",
+            font=dict(
+                family="IBM Plex Mono, monospace",
+                color="#68758A",
+                size=11,
+            ),
+        ),
+        margin=dict(t=40, b=30, l=20, r=20),
+        hoverlabel=dict(
+            bgcolor="#172033",
+            bordercolor="#FF4F81",
+            font=dict(
+                family="DM Sans, sans-serif",
+                color="#FFFFFF",
+            ),
+        ),
     )
+
     fig.update_xaxes(
-        gridcolor="rgba(15,61,46,0.10)",
-        zerolinecolor="rgba(15,61,46,0.2)",
-        tickfont=dict(color=ink),
-        title=dict(font=dict(color=ink)),
-        linecolor="rgba(15,61,46,0.2)",
+        gridcolor="#E8ECF2",
+        zerolinecolor="#DDE3EC",
+        tickfont=dict(
+            color="#68758A",
+            family="IBM Plex Mono, monospace",
+        ),
+        linecolor="#DDE3EC",
     )
+
     fig.update_yaxes(
-        gridcolor="rgba(15,61,46,0.10)",
-        zerolinecolor="rgba(15,61,46,0.2)",
-        tickfont=dict(color=ink),
-        title=dict(font=dict(color=ink)),
-        linecolor="rgba(15,61,46,0.2)",
+        gridcolor="#E8ECF2",
+        zerolinecolor="#DDE3EC",
+        tickfont=dict(
+            color="#68758A",
+            family="IBM Plex Mono, monospace",
+        ),
+        linecolor="#DDE3EC",
     )
-    fig.update_traces(textfont_color="#ffffff", selector=dict(type="pie"))
+
     return fig
