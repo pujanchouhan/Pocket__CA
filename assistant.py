@@ -1,6 +1,6 @@
 """
 assistant.py
-This is the "prompt engineering + AI integration" core of Pocket C.A.
+This is the "prompt engineering + AI integration" core of Numera.
 
 Uses Google Gemini (free tier, no credit card needed) instead of a paid API.
 Get a free key at https://aistudio.google.com/apikey
@@ -26,7 +26,7 @@ import data_utils as du
 
 DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
 
-SYSTEM_PROMPT = """You are Pocket C.A., a friendly and precise AI accounting assistant \
+SYSTEM_PROMPT = """You are Numera, a friendly and precise AI accounting assistant \
 built to help everyday users understand their personal finances and general \
 accounting concepts.
 

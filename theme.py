@@ -1,482 +1,226 @@
-"""
-theme.py
-Pocket C.A. — bright modern fintech theme
-"""
+"""Visual identity and Plotly theme for Numera."""
 
 LEDGER_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
 
-/* =========================
-   MAIN COLORS
-   ========================= */
 :root {
-    --bg: #F4F7FB;
-    --surface: #FFFFFF;
-    --surface-2: #EEF2F7;
-    --text: #172033;
-    --muted: #68758A;
-    --primary: #FF4F81;
-    --primary-dark: #E83D70;
-    --secondary: #5B5FEF;
-    --cyan: #18B7C9;
-    --green: #16A878;
-    --red: #E5485D;
-    --border: #DDE3EC;
+  --navy-950: #081018;
+  --navy-900: #0c151f;
+  --navy-800: #121e2a;
+  --navy-700: #1b2a38;
+  --ink: #e7edf2;
+  --muted: #91a0ad;
+  --line: rgba(171, 191, 205, 0.16);
+  --accent: #35c48b;
+  --accent-soft: rgba(53, 196, 139, 0.14);
+  --radius: 8px;
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
 }
 
-/* =========================
-   APP BACKGROUND
-   ========================= */
-.stApp {
-    background:
-        radial-gradient(circle at 0% 0%, rgba(255,79,129,0.13), transparent 25%),
-        radial-gradient(circle at 100% 0%, rgba(91,95,239,0.13), transparent 25%),
-        #F4F7FB !important;
-    color: #172033 !important;
-}
-
-[data-testid="stAppViewContainer"] {
-    background: #F4F7FB !important;
-}
-
-[data-testid="stHeader"] {
-    background: rgba(244,247,251,0.90) !important;
-}
-
-.block-container {
-    max-width: 1400px !important;
-    padding-top: 2rem !important;
-    padding-bottom: 3rem !important;
-}
-
-/* =========================
-   TEXT
-   ========================= */
+.stApp { background: var(--navy-950); }
 html, body, [class*="css"] {
-    font-family: 'DM Sans', sans-serif !important;
-    color: #172033 !important;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
 }
+h1, h2, h3 { color: var(--ink) !important; letter-spacing: 0; }
+p, label { line-height: 1.45; }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif !important;
-    color: #172033 !important;
-}
-
-p, label, span, div {
-    color: inherit;
-}
-
-/* =========================
-   SIDEBAR
-   ========================= */
+/* Sidebar */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #171B3A 0%, #25205A 100%) !important;
-    border-right: none !important;
+  background: var(--navy-900);
+  border-right: 1px solid var(--line);
 }
-
-[data-testid="stSidebar"] > div:first-child {
-    background: transparent !important;
-}
-
-[data-testid="stSidebar"] * {
-    color: #FFFFFF !important;
-}
-
+[data-testid="stSidebar"] * { color: var(--ink) !important; }
 [data-testid="stSidebar"] input,
-[data-testid="stSidebar"] textarea,
-[data-testid="stSidebar"] [data-baseweb="select"] > div {
-    background: rgba(255,255,255,0.10) !important;
-    color: #FFFFFF !important;
-    border: 1px solid rgba(255,255,255,0.18) !important;
+[data-testid="stSidebar"] textarea { color: var(--ink) !important; }
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] * { color: var(--muted) !important; }
+[data-testid="stSidebar"] hr { border-color: var(--line) !important; margin: 1rem 0; }
+[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
+  background: transparent;
+  border: 1px dashed rgba(53, 196, 139, 0.52);
+  border-radius: var(--radius);
+  padding: 0.7rem;
+}
+[data-testid="stSidebar"] [data-testid="stFileUploaderDropzoneInstructions"] {
+  opacity: 0.78;
+}
+[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] button {
+  background: var(--accent-soft) !important;
+  border: 1px solid rgba(53, 196, 139, 0.35) !important;
+  border-radius: 6px !important;
+  color: var(--accent) !important;
 }
 
-/* =========================
-   HEADER
-   ========================= */
+/* Dashboard header */
 .ledger-header {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, #FF4F81 0%, #8E55E8 52%, #5B5FEF 100%) !important;
-    border: none !important;
-    border-radius: 24px;
-    padding: 2.4rem 2.7rem;
-    margin-bottom: 1.7rem;
-    box-shadow: 0 18px 45px rgba(91,95,239,0.22);
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.4rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  box-shadow: var(--shadow);
 }
-
-.ledger-header::before {
-    content: "";
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    right: -80px;
-    top: -130px;
-    background: rgba(255,255,255,0.16);
-    border-radius: 50%;
-    filter: blur(8px);
-}
-
-.ledger-header::after {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    left: 45%;
-    bottom: -120px;
-    background: rgba(255,255,255,0.10);
-    border-radius: 50%;
-}
-
-.ledger-header h1,
-.ledger-header p,
-.ledger-eyebrow,
-.ledger-tagline,
-.ledger-seal {
-    position: relative;
-    z-index: 2;
-}
-
-.ledger-header h1 {
-    color: #FFFFFF !important;
-    font-size: 2.7rem;
-    font-weight: 700;
-    margin: 0;
-}
-
 .ledger-eyebrow {
-    color: #FFE7EF !important;
-    font-family: 'IBM Plex Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.72rem;
-    margin-bottom: 0.5rem;
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
 }
-
-.ledger-tagline {
-    color: #FFF3F7 !important;
-    margin-top: 0.6rem;
-    font-size: 0.98rem;
+.ledger-header h1 {
+  color: var(--ink) !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 2.35rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 0;
 }
-
+.ledger-tagline { color: var(--muted); font-size: 0.86rem; margin-top: 0.25rem; }
 .ledger-seal {
-    position: absolute;
-    right: 1.8rem;
-    top: 1.4rem;
-    width: 62px;
-    height: 62px;
-    border: 1px solid rgba(255,255,255,0.40);
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF !important;
-    background: rgba(255,255,255,0.12);
+  position: absolute;
+  top: 50%;
+  right: 1.35rem;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-size: 1.3rem;
+  opacity: 0.9;
 }
 
-/* =========================
-   COLUMNS
-   ========================= */
-[data-testid="column"] {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-
-/* =========================
-   METRICS
-   ========================= */
+/* Cards and numeric hierarchy */
 [data-testid="stMetric"] {
-    background: #FFFFFF !important;
-    border: 1px solid #DDE3EC !important;
-    border-top: 4px solid #FF4F81 !important;
-    border-radius: 16px !important;
-    padding: 1rem 1.2rem !important;
-    box-shadow: 0 8px 25px rgba(23,32,51,0.07) !important;
+  background: var(--navy-900) !important;
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.85rem 1rem 0.75rem !important;
 }
-
 [data-testid="stMetricValue"] {
-    color: #172033 !important;
-    font-family: 'IBM Plex Mono', monospace !important;
-    font-weight: 600 !important;
+  color: var(--ink) !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600 !important;
 }
-
 [data-testid="stMetricLabel"] {
-    color: #68758A !important;
-    font-family: 'IBM Plex Mono', monospace !important;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
+  color: var(--muted) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* =========================
-   BUTTONS
-   ========================= */
-.stButton > button {
-    background: #FFFFFF !important;
-    color: #172033 !important;
-    border: 1px solid #DDE3EC !important;
-    border-radius: 11px !important;
-    font-weight: 600 !important;
-    box-shadow: 0 5px 15px rgba(23,32,51,0.05) !important;
+/* Shared controls */
+.stButton button, [data-testid="stDownloadButton"] button {
+  background: var(--navy-800) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius) !important;
+  color: var(--ink) !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 500 !important;
 }
-
-.stButton > button:hover {
-    background: #FFF0F5 !important;
-    color: #E83D70 !important;
-    border-color: #FF4F81 !important;
+.stButton button:hover, [data-testid="stDownloadButton"] button:hover {
+  background: var(--navy-700) !important;
+  border-color: var(--accent) !important;
 }
-
-.stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #FF4F81, #8E55E8) !important;
-    color: #FFFFFF !important;
-    border: none !important;
+.stButton button[kind="primary"] {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--navy-950) !important;
 }
+.stButton button[kind="primary"] p, .stButton button[kind="primary"] span { color: var(--navy-950) !important; }
+[data-testid="stSidebar"] button { color: var(--ink) !important; }
 
-.stButton > button[kind="primary"] * {
-    color: #FFFFFF !important;
+/* Suggested questions read as one prompt surface */
+[data-testid="stHorizontalBlock"] .stButton button {
+  background: var(--navy-800) !important;
+  border-color: rgba(53, 196, 139, 0.2) !important;
+  border-radius: 0 !important;
+  color: var(--muted) !important;
+  font-size: 0.82rem !important;
+  min-height: 2.7rem;
 }
-
-/* =========================
-   INPUTS
-   ========================= */
-.stTextInput input,
-.stNumberInput input,
-.stTextArea textarea {
-    background: #FFFFFF !important;
-    color: #172033 !important;
-    border: 1px solid #DDE3EC !important;
-    border-radius: 11px !important;
+[data-testid="stHorizontalBlock"] > div:first-child .stButton button { border-radius: var(--radius) 0 0 var(--radius) !important; }
+[data-testid="stHorizontalBlock"] > div:last-child .stButton button { border-radius: 0 var(--radius) var(--radius) 0 !important; }
+[data-testid="stHorizontalBlock"] .stButton button:hover { color: var(--accent) !important; }
+[data-testid="stChatInput"] {
+  border-color: rgba(53, 196, 139, 0.4) !important;
+  border-radius: var(--radius) !important;
+  background: var(--navy-900) !important;
 }
+[data-testid="stChatInput"] textarea { color: var(--ink) !important; font-family: 'DM Sans', sans-serif; }
 
-.stTextInput input:focus,
-.stNumberInput input:focus,
-.stTextArea textarea:focus {
-    border-color: #FF4F81 !important;
-    box-shadow: 0 0 0 1px #FF4F81 !important;
-}
-
-[data-baseweb="select"] > div {
-    background: #FFFFFF !important;
-    color: #172033 !important;
-    border-color: #DDE3EC !important;
-    border-radius: 11px !important;
-}
-
-/* Dropdown text */
-[data-baseweb="select"] * {
-    color: #172033 !important;
-}
-
-/* =========================
-   TABS
-   ========================= */
-.stTabs [data-baseweb="tab-list"] {
-    background: #FFFFFF !important;
-    border: 1px solid #DDE3EC !important;
-    border-radius: 13px !important;
-    padding: 0.3rem;
-    gap: 0.25rem;
-}
-
-.stTabs [data-baseweb="tab"] {
-    color: #68758A !important;
-    border-radius: 9px;
-    font-family: 'IBM Plex Mono', monospace;
-}
-
-.stTabs [aria-selected="true"] {
-    background: #FFF0F5 !important;
-    color: #E83D70 !important;
-}
-
-.stTabs [data-baseweb="tab-highlight"] {
-    background: #FF4F81 !important;
-}
-
-/* =========================
-   CHAT
-   ========================= */
+/* Tabs, messages, notes and charts */
+.stTabs [data-baseweb="tab"] { color: var(--muted); font-size: 0.86rem; }
+.stTabs [aria-selected="true"] { color: var(--accent) !important; font-weight: 600; }
+.stTabs [data-baseweb="tab-highlight"] { background: var(--accent) !important; }
 [data-testid="stChatMessage"] {
-    background: #FFFFFF !important;
-    border: 1px solid #DDE3EC !important;
-    border-radius: 15px !important;
-    box-shadow: 0 7px 20px rgba(23,32,51,0.06) !important;
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 0.6rem;
 }
-
-[data-testid="stChatInput"] textarea {
-    background: #FFFFFF !important;
-    color: #172033 !important;
-}
-
-/* =========================
-   CUSTOM CARDS
-   ========================= */
 .ledger-section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    color: #172033 !important;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    border-bottom: 1px solid #DDE3EC;
-    padding-bottom: 0.5rem;
-    margin: 1.4rem 0 0.9rem;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.3rem;
+  margin: 1.2rem 0 0.75rem;
+  display: inline-block;
 }
-
-.ledger-section-title::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #FF4F81;
-    box-shadow: 0 0 12px rgba(255,79,129,0.45);
-}
-
 .ledger-note {
-    background: #FFF4F7 !important;
-    color: #172033 !important;
-    border: 1px solid #FFD1DE !important;
-    border-left: 4px solid #FF4F81 !important;
-    border-radius: 10px;
-    padding: 0.9rem 1.1rem;
+  background: var(--navy-900);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 0.86rem;
+  padding: 0.75rem 0.95rem;
 }
-
 .ledger-chart-card {
-    background: #FFFFFF !important;
-    border: 1px solid #DDE3EC !important;
-    border-radius: 16px;
-    padding: 0.6rem 0.8rem;
-    box-shadow: 0 8px 25px rgba(23,32,51,0.06);
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.65rem 0.1rem;
 }
-
-/* =========================
-   EXPANDER / DATAFRAME
-   ========================= */
-[data-testid="stExpander"] {
-    background: #FFFFFF !important;
-    border: 1px solid #DDE3EC !important;
-    border-radius: 13px !important;
-}
-
-[data-testid="stDataFrame"] {
-    border: 1px solid #DDE3EC !important;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-/* =========================
-   FILE UPLOADER
-   ========================= */
-[data-testid="stFileUploaderDropzone"] {
-    background: #FFFFFF !important;
-    border: 1px dashed #FF4F81 !important;
-    border-radius: 13px !important;
-}
-
-[data-testid="stFileUploaderDropzone"]:hover {
-    background: #FFF4F7 !important;
-}
-
-/* =========================
-   DIVIDERS
-   ========================= */
-hr {
-    border-color: #DDE3EC !important;
-}
-
-/* =========================
-   MOBILE
-   ========================= */
-@media (max-width: 768px) {
-    .block-container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-
-    .ledger-header {
-        padding: 1.7rem;
-        border-radius: 18px;
-    }
-
-    .ledger-header h1 {
-        font-size: 2.1rem;
-    }
-
-    .ledger-seal {
-        display: none;
-    }
-
-    [data-testid="column"] {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
+[data-testid="stCaptionContainer"] { color: var(--muted) !important; font-size: 0.76rem; }
+[data-testid="stDataFrame"] { border: 1px solid var(--line); border-radius: var(--radius); }
 </style>
 """
 
-PLOTLY_COLORWAY = [
-    "#FF4F81",
-    "#5B5FEF",
-    "#18B7C9",
-    "#16A878",
-    "#E5485D",
-    "#8E55E8",
-]
+PLOTLY_COLORWAY = ["#35C48B", "#D5A957", "#6EA8D9", "#E17878", "#A68BD4", "#91A0AD"]
+
 
 def apply_ledger_chart_theme(fig):
+    """Apply Numera colors and typography to a Plotly figure."""
+    ink = "#E7EDF2"
     fig.update_layout(
         colorway=PLOTLY_COLORWAY,
-        paper_bgcolor="#FFFFFF",
-        plot_bgcolor="#FFFFFF",
-        font=dict(
-            family="DM Sans, sans-serif",
-            color="#172033",
-            size=13,
-        ),
-        title=dict(
-            font=dict(
-                family="Space Grotesk, sans-serif",
-                color="#172033",
-                size=18,
-            )
-        ),
-        legend=dict(
-            bgcolor="rgba(255,255,255,0)",
-            font=dict(
-                family="IBM Plex Mono, monospace",
-                color="#68758A",
-                size=11,
-            ),
-        ),
-        margin=dict(t=40, b=30, l=20, r=20),
-        hoverlabel=dict(
-            bgcolor="#172033",
-            bordercolor="#FF4F81",
-            font=dict(
-                family="DM Sans, sans-serif",
-                color="#FFFFFF",
-            ),
-        ),
+        paper_bgcolor="#0C151F",
+        plot_bgcolor="#0C151F",
+        font=dict(family="DM Sans, sans-serif", color=ink, size=13),
+        title=dict(font=dict(color=ink)),
+        legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=ink, size=12)),
+        margin=dict(t=30, b=20, l=10, r=10),
     )
-
     fig.update_xaxes(
-        gridcolor="#E8ECF2",
-        zerolinecolor="#DDE3EC",
-        tickfont=dict(
-            color="#68758A",
-            family="IBM Plex Mono, monospace",
-        ),
-        linecolor="#DDE3EC",
+        gridcolor="rgba(171,191,205,0.12)",
+        zerolinecolor="rgba(171,191,205,0.2)",
+        tickfont=dict(color=ink),
+        title=dict(font=dict(color=ink)),
+        linecolor="rgba(171,191,205,0.2)",
     )
-
     fig.update_yaxes(
-        gridcolor="#E8ECF2",
-        zerolinecolor="#DDE3EC",
-        tickfont=dict(
-            color="#68758A",
-            family="IBM Plex Mono, monospace",
-        ),
-        linecolor="#DDE3EC",
+        gridcolor="rgba(171,191,205,0.12)",
+        zerolinecolor="rgba(171,191,205,0.2)",
+        tickfont=dict(color=ink),
+        title=dict(font=dict(color=ink)),
+        linecolor="rgba(171,191,205,0.2)",
     )
-
+    fig.update_traces(textfont_color="#081018", selector=dict(type="pie"))
     return fig

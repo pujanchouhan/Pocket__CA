@@ -1,6 +1,6 @@
-# 💰 Pocket C.A. — AI-Powered Accounting Assistant
+# 💰 Numera — AI-Powered Accounting Assistant
 
-An intelligent, conversational accounting assistant built with **Streamlit** and powered by **Google's free Gemini API**. Pocket C.A. goes beyond a basic Q&A bot — it grounds every answer in real, computed numbers from your uploaded transactions, auto-generates visual financial reports, and writes AI narrative summaries. All of it runs at **zero cost**, with no credit card required anywhere in the stack.
+An intelligent, conversational accounting assistant built with **Streamlit** and powered by **Google's free Gemini API**. Numera goes beyond a basic Q&A bot — it grounds every answer in real, computed numbers from your uploaded transactions, auto-generates visual financial reports, and writes AI narrative summaries. All of it runs at **zero cost**, with no credit card required anywhere in the stack.
 
 🔗 **Live Demo:** https://pocketca-egsmcmi7zpv7f8j5ttzaw4.streamlit.app/
 🔗 **GitHub Repo:** https://github.com/pujanchouhan/Pocket__CA.git

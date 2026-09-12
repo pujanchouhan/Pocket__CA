@@ -7,14 +7,14 @@ import data_utils as du
 from assistant import ask_pocket_ca, generate_report_narrative, get_model
 from theme import LEDGER_CSS, apply_ledger_chart_theme
 
-st.set_page_config(page_title="Pocket C.A.", page_icon="💰", layout="wide")
+st.set_page_config(page_title="Numera", page_icon="💰", layout="wide")
 st.markdown(LEDGER_CSS, unsafe_allow_html=True)
 
 # ---------------------------------------------------------------------------
 # Sidebar: API key + data upload
 # ---------------------------------------------------------------------------
 st.sidebar.markdown(
-    "<div style='font-family:Fraunces,serif; font-size:1.5rem; font-weight:700;'>💰 Pocket C.A.</div>",
+    "<div style='font-family:Space Grotesk,sans-serif; font-size:1.9rem; font-weight:700; letter-spacing:-0.03em;'>💰 Numera</div>",
     unsafe_allow_html=True,
 )
 st.sidebar.caption("Your pocket accounting assistant")
@@ -62,8 +62,8 @@ if st.session_state.df is not None:
 
 st.sidebar.divider()
 st.sidebar.caption(
-    "⚠️ Pocket C.A. gives general educational guidance only. "
-    "It is not a substitute for a licensed accountant or financial advisor."
+    "For educational use only. Not a substitute for professional accounting "
+    "or financial advice."
 )
 
 # ---------------------------------------------------------------------------
@@ -74,7 +74,7 @@ st.markdown(
     <div class="ledger-header">
       <div class="ledger-seal">💰</div>
       <div class="ledger-eyebrow">General Ledger · Personal Accounts</div>
-      <h1>Pocket C.A.</h1>
+    <h1>Numera</h1>
       <div class="ledger-tagline">Your AI accounting assistant — every answer grounded in your real, computed numbers, never a guess.</div>
     </div>
     """,
@@ -212,7 +212,7 @@ with tab_reports:
         if st.session_state.get("_narrative"):
             st.markdown(st.session_state["_narrative"])
             report_text = (
-                f"# Pocket C.A. Financial Report — {selected_month}\n\n"
+                f"# Numera Financial Report — {selected_month}\n\n"
                 f"{st.session_state['_narrative']}\n\n"
                 f"## Numbers\n"
                 f"- Total income: ${summary['total_income']:,.2f}\n"
@@ -222,6 +222,6 @@ with tab_reports:
             st.download_button(
                 "⬇ Download report as Markdown",
                 data=report_text,
-                file_name=f"pocket_ca_report_{selected_month}.md",
+                file_name=f"numera_report_{selected_month}.md",
                 mime="text/markdown",
             )
